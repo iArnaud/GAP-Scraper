@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
+    "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.sparkline.min.js"></script>
+
+    <script type="text/javascript">
+    $(function() {
+        /** This code runs when everything has been loaded on the page */
+        /* Inline sparklines take their values from the contents of the tag */
+        $('.inlinesparkline').sparkline('html',{ width:'100px', height: '50px' }); 
+    });
+    </script>
+	<style type="text/css">
+	.inlinesparkline {
+		width: 100px;
+	}
+	</style>
+	
+</head>
+<body>
+	<table>
+	<% for i in 1..country_count() %>
+	<% if (i-1) % 4 == 0%>
+	<tr>
+	<% end %>
+	  <td><span class="inlinesparkline"><%= impact_for_id(i) * "," %></span><br /><%= country_for_id(i) %></td>
+  	<% if (i-1) % 4 == 0%>
+	</tr>
+  	<% end %>
+	<% end %>
+</table>
+
+</body>
+</html>
