@@ -16,20 +16,56 @@
 	.inlinesparkline {
 		width: 100px;
 	}
+	* {
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+		font-weight: 300;
+		text-align: center;
+	}
+	.country {
+		font-size: 10pt;
+	}
+	
+	table {
+		margin: 0 auto;
+		padding: 20px;
+	}
+	td {
+		padding: 20px;
+		background-color: #F0F5F5;
+	}
+	li {
+		text-align: left;
+		font-size: 8pt;
+	}
+	.desc {
+		font-style: italic;
+		width: 600px;
+		margin: 0 auto;
+	}
+	
 	</style>
 	
 </head>
 <body>
+	<h1>Big Media Influence in Internet Nations</h1>
+	<p class="desc">Below is a chart depicting the number of readers for the top 10 news sites in 60 countries. The dataset evaluated 4,000 websites and shows how much influence the largest media sources have on each country's population. YouTube was the most popular news source in every country, but was omitted from this dataset.</p>
 	<table>
+		<tr>
 	<% for i in 1..country_count() %>
-	<% if (i-1) % 4 == 0%>
-	<tr>
-	<% end %>
-	  <td><span class="inlinesparkline"><%= impact_for_id(i) * "," %></span><br /><%= country_for_id(i) %></td>
-  	<% if (i-1) % 4 == 0%>
+	  <td><span class="inlinesparkline"><%= impact_for_id(i) * "," %></span><br /><span class="country"><%= country_for_id(i) %></span>
+		  <ol>
+			  <% top = top5_for_id(i) %>
+			  <% for j in 0..4 %>
+			  	<li><%= top[j] %></li>
+			  <% end %>
+		  </ol>
+	  </td>
+  	<% if i % 4 == 0%>
 	</tr>
+	<tr>
   	<% end %>
 	<% end %>
+</tr>
 </table>
 
 </body>
